@@ -1,0 +1,72 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.jasypt.helper.plugin</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Jasypt Helper</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="battery.stiller_9d@icloud.com" url="#">Jasypt Helper</vendor>
+
+    <!-- https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+        <p>Encrypt and decrypt configuration values in <code>YAML</code>, <code>YML</code>, and <code>Properties</code> files using Jasypt.</p>
+        <p>Automatically detects and processes values wrapped in <code>ENC(...)</code> (encrypted) or <code>DEC(...)</code> (plaintext to encrypt).</p>
+        <h4>Features</h4>
+        <ul>
+            <li>Right-click on config files in Project View or Editor to encrypt/decrypt</li>
+            <li>Supports multiple Jasypt algorithms (e.g., PBEWITHHMACSHA512ANDAES_256)</li>
+        </ul>
+        <h4>Usage</h4>
+        <ol>
+            <li>Right-click a <code>.yaml</code>, <code>.yml</code>, or <code>.properties</code> file</li>
+            <li>Select <strong>Jasypt Encrypt/Decrypt</strong></li>
+            <li>Enter your password and choose an algorithm</li>
+            <li>Click <strong>Encrypt</strong> (converts <code>DEC(...)</code> → <code>ENC(...)</code>)<br>
+                or <strong>Decrypt</strong> (converts <code>ENC(...)</code> → plaintext)</li>
+        </ol>
+        <p><em>Note: This plugin does not store or transmit your password.</em></p>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <h4>Version 1.0.1</h4>
+        <ul>
+            <li>Added compatibility with IntelliJ IDEA 2024.3 and newer versions</li>
+        </ul>
+        <h4>Version 1.0.0</h4>
+        <ul>
+            <li>Initial release</li>
+            <li>Support for YAML, YML, and Properties files</li>
+            <li>Encrypt/decrypt via context menu</li>
+            <li>Multiple Jasypt algorithm support</li>
+        </ul>
+    ]]></change-notes>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add file type associations -->
+        <fileType name="YAML" fieldName="YAML" language="YAML" extensions="yaml;yml"/>
+        <fileType name="Properties" fieldName="PROPERTIES" language="Properties" extensions="properties"/>
+    </extensions>
+
+    <actions>
+        <!-- Action for project view context menu -->
+        <action id="JasyptAction.ProjectView" class="com.jasypt.helper.plugin.JasyptAction"
+                text="%menu.jasypt%" description="%menu.jasypt.description%">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </action>
+
+        <!-- Action for editor context menu -->
+        <action id="JasyptAction.Editor" class="com.jasypt.helper.plugin.JasyptAction"
+                text="%menu.jasypt%" description="%menu.jasypt.description%">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
