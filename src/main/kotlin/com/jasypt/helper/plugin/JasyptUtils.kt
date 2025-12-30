@@ -70,7 +70,7 @@ object JasyptUtils {
     fun encryptContent(content: String, password: String, algorithm: String): String {
         val encryptor = createEncryptor(password, algorithm)
 
-        val decPattern = """DEC\(([^)]+)\)""".toRegex()
+        val decPattern = """DEC\((.*)\)""".toRegex()
         return decPattern.replace(content) { matchResult ->
             val plainText = matchResult.groupValues[1]
             val encrypted = encryptor.encrypt(plainText)
@@ -81,7 +81,7 @@ object JasyptUtils {
     fun decryptContent(content: String, password: String, algorithm: String): String {
         val encryptor = createEncryptor(password, algorithm)
 
-        val encPattern = """ENC\(([^)]+)\)""".toRegex()
+        val encPattern = """ENC\((.*)\)""".toRegex()
         return encPattern.replace(content) { matchResult ->
             val encryptedText = matchResult.groupValues[1]
             val decrypted = encryptor.decrypt(encryptedText)

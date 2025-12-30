@@ -31,6 +31,14 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <h4>Version 1.0.2</h4>
+        <ul>
+            <li>Fixed: Correctly handle parentheses inside DEC(...) and ENC(...) markers</li>
+            <li>Improved: Input fields now resize with dialog window width</li>
+            <li>Added: Remember user's selected algorithm preference</li>
+            <li>Added: Basic password persistence with Base64 encoding</li>
+            <li>Improved: Better error handling for decryption failures</li>
+        </ul>
         <h4>Version 1.0.1</h4>
         <ul>
             <li>Added compatibility with IntelliJ IDEA 2024.3 and newer versions</li>

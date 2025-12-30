@@ -78,6 +78,14 @@ class JasyptDialog(
         try {
             ApplicationManager.getApplication().runWriteAction {
                 file.setBinaryContent(content.toByteArray())
+
+                file.refresh(false, false)
+
+                val documentManager = com.intellij.openapi.fileEditor.FileDocumentManager.getInstance()
+                val document = documentManager.getDocument(file)
+                if (document != null) {
+                    documentManager.reloadFromDisk(document)
+                }
             }
         } catch (e: Exception) {
             com.intellij.openapi.ui.Messages.showErrorDialog(
@@ -104,7 +112,7 @@ class JasyptDialog(
         saveSelectedAlgorithm(algorithm)
 
         val originalContent = try {
-            String(file.contentsToByteArray())
+            getLatestFileContent()
         } catch (e: Exception) {
             com.intellij.openapi.ui.Messages.showErrorDialog(
                     project,
@@ -135,6 +143,12 @@ class JasyptDialog(
                     title
             )
         }
+    }
+
+    private fun getLatestFileContent(): String {
+        val documentManager = com.intellij.openapi.fileEditor.FileDocumentManager.getInstance()
+        val document = documentManager.getDocument(file)
+        return document?.text ?: String(file.contentsToByteArray())
     }
 
     private fun encryptContent(content: String, password: String, algorithm: String): String {
