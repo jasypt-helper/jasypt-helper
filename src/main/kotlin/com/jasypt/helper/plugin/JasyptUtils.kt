@@ -8,11 +8,11 @@ import javax.crypto.Cipher
 object JasyptUtils {
 
     private val defaultAlgorithms: List<String> = listOf(
-            "PBEWithMD5AndDES",
-            "PBEWithMD5AndTripleDES",
-            "PBEWithSHA1AndDESede",
-            "PBEWithSHA1AndRC2_40",
-            "PBEWITHHMACSHA512ANDAES_256"
+        "PBEWithMD5AndDES",
+        "PBEWithMD5AndTripleDES",
+        "PBEWithSHA1AndDESede",
+        "PBEWithSHA1AndRC2_40",
+        "PBEWITHHMACSHA512ANDAES_256"
     )
 
     private fun getAvailablePBEAlgorithms(): List<String> {

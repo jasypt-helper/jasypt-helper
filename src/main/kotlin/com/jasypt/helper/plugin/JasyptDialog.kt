@@ -13,8 +13,8 @@ import javax.swing.AbstractAction
 import javax.swing.JComponent
 
 class JasyptDialog(
-        private val project: Project,
-        private val file: VirtualFile
+    private val project: Project,
+    private val file: VirtualFile
 ) : DialogWrapper(project, true) {
     private val passwordField = JBTextField()
     private val algorithmComboBox = ComboBox<String>(250)
@@ -51,26 +51,26 @@ class JasyptDialog(
         return panel {
             row(I18n.getMessage("dialog.password")) {
                 cell(passwordField)
-                        .focused()
-                        .applyToComponent {
-                            toolTipText = I18n.getMessage("dialog.password.tooltip")
-                        }
-                        .widthGroup("fields")
+                    .focused()
+                    .applyToComponent {
+                        toolTipText = I18n.getMessage("dialog.password.tooltip")
+                    }
+                    .widthGroup("fields")
             }
             row(I18n.getMessage("dialog.algorithm")) {
                 cell(algorithmComboBox)
-                        .applyToComponent {
-                            toolTipText = I18n.getMessage("dialog.algorithm.tooltip")
-                        }
-                        .widthGroup("fields")
+                    .applyToComponent {
+                        toolTipText = I18n.getMessage("dialog.algorithm.tooltip")
+                    }
+                    .widthGroup("fields")
             }
         }
     }
 
     override fun createActions(): Array<AbstractAction> {
         return arrayOf(
-                EncryptAction(),
-                DecryptAction()
+            EncryptAction(),
+            DecryptAction()
         )
     }
 
@@ -89,9 +89,9 @@ class JasyptDialog(
             }
         } catch (e: Exception) {
             com.intellij.openapi.ui.Messages.showErrorDialog(
-                    project,
-                    I18n.getMessage("message.save.file.error", e.message ?: ""),
-                    title
+                project,
+                I18n.getMessage("message.save.file.error", e.message ?: ""),
+                title
             )
         }
     }
@@ -100,9 +100,9 @@ class JasyptDialog(
         val password = passwordField.text
         if (password.isBlank()) {
             com.intellij.openapi.ui.Messages.showErrorDialog(
-                    project,
-                    I18n.getMessage("message.enter.password"),
-                    title
+                project,
+                I18n.getMessage("message.enter.password"),
+                title
             )
             return
         }
@@ -115,9 +115,9 @@ class JasyptDialog(
             getLatestFileContent()
         } catch (e: Exception) {
             com.intellij.openapi.ui.Messages.showErrorDialog(
-                    project,
-                    I18n.getMessage("message.read.file.error", e.message ?: ""),
-                    title
+                project,
+                I18n.getMessage("message.read.file.error", e.message ?: ""),
+                title
             )
             return
         }
@@ -132,15 +132,15 @@ class JasyptDialog(
             saveFileContent(processedContent)
 
             com.intellij.openapi.ui.Messages.showInfoMessage(
-                    project,
-                    if (encrypt) I18n.getMessage("message.encrypt.success") else I18n.getMessage("message.decrypt.success"),
-                    title
+                project,
+                if (encrypt) I18n.getMessage("message.encrypt.success") else I18n.getMessage("message.decrypt.success"),
+                title
             )
         } catch (e: Exception) {
             com.intellij.openapi.ui.Messages.showErrorDialog(
-                    project,
-                    I18n.getMessage("message.process.error", e.message ?: e.toString()),
-                    title
+                project,
+                I18n.getMessage("message.process.error", e.message ?: e.toString()),
+                title
             )
         }
     }
