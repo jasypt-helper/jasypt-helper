@@ -31,6 +31,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <h4>Version 1.0.3</h4>
+        <ul>
+            <li>Added: New icon</li>
+        </ul>
         <h4>Version 1.0.2</h4>
         <ul>
             <li>Fixed: Correctly handle parentheses inside DEC(...) and ENC(...) markers</li>
